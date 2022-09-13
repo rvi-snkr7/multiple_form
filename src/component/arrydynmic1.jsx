@@ -11,9 +11,7 @@ function ArrayList(){
         <h1>Friend List</h1>
         <Formik
             initialValues={{
-
                 name:"",
-                child:"",
                 }}
             onSubmit={values =>
                 setTimeout(() => {
@@ -22,6 +20,7 @@ function ArrayList(){
             }
             render={({ values }) => (
                 <Form>
+                    <Field  name="name" placeholder="Name"></Field>
                     <FieldArray
                         name="mobile"
                         render={arrayHelpers => (
@@ -50,12 +49,43 @@ function ArrayList(){
                                         Add Mobile
                                     </button>
                                 )}
-                                <div>
-                                    <button type="submit">Submit</button>
-                                </div>
                             </div>
                         )}
                     />
+                    <FieldArray
+                        name="child"
+                        render={arrayHelpers => (
+                            <div>
+                                {values.child && values.child.length > 0 ? (
+                                    values.child.map((children, index) => (
+                                        <div key={index}>
+                                            <Field name={`child.${index}`} />
+                                            <button
+                                                type="button"
+                                                onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                                            >
+                                                -
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a position
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <button type="button" onClick={() => arrayHelpers.push('')}>
+                                        {/* show this when user has removed all friends from the list */}
+                                        Add Children
+                                    </button>
+                                )}
+                            </div>
+                        )}
+                    />
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
                 </Form>
             )}
         />

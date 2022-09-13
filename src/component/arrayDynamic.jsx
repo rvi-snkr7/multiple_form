@@ -17,7 +17,7 @@ import { Formik, Form, Field } from 'formik';
             }}
         >
             <Form>
-                <Field name="address" placeholder="Adress" /><br></br>
+                <Field name="address" placeholder="Adress" /><br></ br>
                 <Field name="friends[0]" />
                 <Field name="friends[1]" />
                 <button type="submit">Submit</button>
